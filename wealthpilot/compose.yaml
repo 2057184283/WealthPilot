@@ -1,0 +1,20 @@
+services:
+  wealthpilot:
+    build: .
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      HOST: 0.0.0.0
+      PORT: 3000
+      DATA_DIR: /app/data
+      ACCESS_TOKEN: ${ACCESS_TOKEN:?Set ACCESS_TOKEN to at least 24 characters}
+      PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-http://localhost:3000}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      AI_BASE_URL: ${AI_BASE_URL:-}
+      AI_API_KEY: ${AI_API_KEY:-}
+      AI_MODEL: ${AI_MODEL:-}
+    volumes:
+      - wealthpilot-data:/app/data
+    restart: unless-stopped
+volumes:
+  wealthpilot-data:
